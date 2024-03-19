@@ -83,7 +83,7 @@ public:
     }
 
     void priorityOrder(){
-        std::sort(this->cars.begin(), this->cars.end(), [](const Car car1, const Car car2) {
+        std::sort(this->cars.begin(), this->cars.end(), [](Car const car1, Car const car2) {
             return car1.getPosition() < car2.getPosition();});
         for(auto const &car : this->cars)
             priority_cars.push_back(car);
@@ -118,9 +118,9 @@ public:
         std::cout << "game constructor";
     }
 
-    const Direction &getDirection() const {
-        return direction;
-    }
+//    const Direction &getDirection() const {
+//        return direction;
+//    }
 
     friend std::ostream &operator<<(std::ostream &os, const Game &game) {
         os << "car: ";
@@ -145,6 +145,9 @@ int main() {
     direction1.setCars({car1, car2});
     std::cout << direction1 << std::endl;  // should return input error
 
+    direction1.setCars({Car(2, "green"), car1});
+    direction1.priorityOrder();
+    std::cout << direction1 << std::endl;
     Game game{direction1};
     std::cout << game;
     return 0;
