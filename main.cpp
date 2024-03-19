@@ -44,7 +44,9 @@ public:
         return os;
     }
 
-
+    virtual ~Car() {
+        std::cout<<"this is the distructor\n";
+    }
 };
 
 class Direction
