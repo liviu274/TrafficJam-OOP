@@ -83,7 +83,7 @@ public:
     }
 
     void priorityOrder(){
-        std::sort(this->cars.begin(), this->cars.end(), [](Car const &car1, Car const &car2) {
+        std::sort(this->cars.begin(), this->cars.end(), [](const Car &car1, const Car &car2) {
             return car1.getPosition() < car2.getPosition();});
         for(auto const &car : this->cars)
             priority_cars.push_back(car);
