@@ -15,20 +15,22 @@ namespace rndm {
 
     protected:
 
-        std::vector <int> avalablePositions;
+        std::vector<int> availablePositions;
 
     public:
 //    Constructors
         RandomGenerator() = default;
+
 //    Destructors
         virtual ~RandomGenerator() = default;
 
 //    Public functions
         static void init();
+
         static int generatePosition();
 
 //     Pure virtual setters
-        virtual void setAvalablePositions(std::vector <int> &positions);
+        virtual void setAvailablePositions(std::vector<int> &positions);
     };
 
 }

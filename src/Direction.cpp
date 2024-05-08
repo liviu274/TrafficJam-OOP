@@ -29,7 +29,7 @@ Direction::~Direction() {
 //    std::cout << "set cars succeeded\n";
 //}
 
-std::vector<Car*> &Direction::getCars() {
+std::vector<Car *> &Direction::getCars() {
     return this->cars;
 }
 
@@ -40,9 +40,10 @@ int Direction::getPosition() const {
 //   Class functionalities
 
 void Direction::priorityOrder() {
-    std::sort(this->cars.begin(), this->cars.end(), [](const Car* car1, const Car* car2) {
-        return car1->getPosition() < car2->getPosition();});
-    for(auto const &car : this->cars)
+    std::sort(this->cars.begin(), this->cars.end(), [](const Car *car1, const Car *car2) {
+        return car1->getPosition() < car2->getPosition();
+    });
+    for (auto const &car: this->cars)
         priority_cars.push_back(car);
 }
 

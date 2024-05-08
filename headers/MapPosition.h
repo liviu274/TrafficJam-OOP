@@ -6,7 +6,7 @@
 #define OOP_MAPPOSITION_H
 
 
-enum class MapPosition : int{
+enum class MapPosition : int {
     UP = 1,
     RIGHT = 2,
     DOWN = 3,

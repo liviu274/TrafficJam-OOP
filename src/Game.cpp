@@ -9,37 +9,50 @@
 // PRIVATE
 
 
-bool Game::isCarPositionAvalable(int position, int directionPosition) {
-    return position != directionPosition && this->usedCarPositions.contains(position);
-}
 
-int Game::generateCarPosition(int directionPosition) {
-    int pos = rndm::RandomGenerator::generatePosition();
-    while (!isCarPositionAvalable(pos, directionPosition))
-        pos = rndm::RandomGenerator::generatePosition();
-
-    this->usedCarPositions.insert(pos);
-}
 
 // PUBLIC
 
 void Game::initGame(int numberOfDirections) {
-    for (int cnt = 1; cnt <= numberOfDirections; cnt++){
+    for (int cnt = 1; cnt <= numberOfDirections; cnt++) {
         this->directions.push_back(new Direction(int(MapPosition::foo)));
     }
 
-    for (auto const &direction : directions){
-        direction->addCar(generateCarPosition(direction->getPosition()),
-                          "testColor");
+    for (const auto &direction: directions) {
+        this->usedDirectionPositions.insert(direction->getPosition());
+    }
+
+    for (auto const &direction: directions) {
+        numberOfCars = rndm::RandomCarGenerator::generateNumberOfCars(1, 3);
+        std::cout << numberOfCars << "\n";
+        for(unsigned int index = 1; index <= numberOfCars; index++)
+        {
+            direction->addCar(rndm::RandomCarGenerator::generateCarPosition(direction->getPosition(), this->usedCarPositions),
+                              "fooColor");
+
+        }
     }
 }
 
+unsigned int Game::getNumberOfCars() const {
+    return numberOfCars;
+}
 
+const std::vector<Direction *> &Game::getDirections() const {
+    return directions;
+}
 
-//std::ostream &operator<<(std::ostream &os, Game &game){
-//    os << "car: ";
-//    for (const auto& el : game.direction.getCars())
-//        os << el.getPosition() << " " << el.getColor() << "\n";
-//    os << "direction position: " << game.direction.getPosition();
-//    return os;
-//}
+std::ostream &operator<<(std::ostream &os, Game &game){
+    os << "Number of cars: " << game.getNumberOfCars() << "\n";
+
+    for (const auto& direction : game.getDirections())
+    {
+        os << "car: ";
+        for (auto& car : direction->getCars())
+        {
+            os << car->getPosition();
+        }
+        os << std::endl;
+    }
+    return os;
+}

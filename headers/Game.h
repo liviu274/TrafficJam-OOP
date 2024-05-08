@@ -3,22 +3,22 @@
 
 #include "Direction.h"
 #include "RandomGenerator.h"
+#include "RandomCarGenerator.h"
 #include "MapPosition.h"
 #include <set>
 
 
-
-
 class Game {
 private:
-    std::vector<Direction*> directions;
-    int initilisedCars = 0;
+    std::vector<Direction *> directions;
+    [[maybe_unused]] int numberOfInitialisedCars = 0;
+    [[maybe_unused]] unsigned int numberOfCars;
 
-    std::set< int > usedCarPositions;
+    std::set<int> usedCarPositions;
+    std::set<int> usedDirectionPositions;
 
 //    Private functions
-    bool isCarPositionAvalable(int position, int directionPosition);
-    int generateCarPosition(int directionPosition);
+
 
 public:
 // Constructors
@@ -26,11 +26,16 @@ public:
 
 // Initializers
 
-void initGame(int numberOfDirections);
+    void initGame(int numberOfDirections);
+
+// Getters
+    unsigned int getNumberOfCars() const;
+
+    const std::vector<Direction *> &getDirections() const;
 
 
 // Ostream
-//    friend std::ostream &operator<<(std::ostream &os, Game &game);
+    friend std::ostream &operator<<(std::ostream &os, Game &game);
 };
 
 
