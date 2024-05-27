@@ -29,9 +29,9 @@ public:
     void initGame(int numberOfDirections);
 
 // Getters
-    unsigned int getNumberOfCars() const;
+    [[nodiscard]] unsigned int getNumberOfCars() const;
 
-    const std::vector<Direction *> &getDirections() const;
+    [[nodiscard]] const std::vector<Direction *> &getDirections() const;
 
 
 // Ostream

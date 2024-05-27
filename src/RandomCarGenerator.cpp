@@ -5,16 +5,17 @@ namespace rndm {
         unsigned int valueRange = std::rand() % (maxValue - minValue + 1);
         return minValue + valueRange;
     }
+//
+//    [[maybe_unused]] std::vector<Car *> &RandomCarGenerator::generateCarVector(unsigned int numberOfCars) {
+//        std::vector<Car *> cars;
+//        for (unsigned int i = 1; i <=
+//                                 numberOfCars; i++) {
+//            cars.push_back(new Car(generatePosition(), "color"));
+//        }
+//        return cars;
+//    }
 
-    [[maybe_unused]] std::vector<Car *> &RandomCarGenerator::generateCarVector(unsigned int numberOfCars) {
-        std::vector<Car *> cars;
-        for (unsigned int i = 1; i <=
-                                 numberOfCars; i++) {
-            cars.push_back(new Car(generatePosition(), "color"));
-        }
-    }
-
-    [[maybe_unused]] void RandomGenerator::setAvailablePositions(std::vector<int> &positions) {
+     void RandomGenerator::setAvailablePositions(std::vector<int> &positions) {
         this->availablePositions = positions;
     }
 
@@ -29,6 +30,7 @@ namespace rndm {
         }
 
         usedCarPositions.insert(pos);
+        return pos;
     }
 
 } // rndm

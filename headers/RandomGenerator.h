@@ -29,7 +29,7 @@ namespace rndm {
 
         static int generatePosition();
 
-//     Pure virtual setters
+//     Pure virtual methods
         virtual void setAvailablePositions(std::vector<int> &positions);
     };
 
