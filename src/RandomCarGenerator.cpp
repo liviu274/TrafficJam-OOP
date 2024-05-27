@@ -15,7 +15,7 @@ namespace rndm {
 //        return cars;
 //    }
 
-     void RandomGenerator::setAvailablePositions(std::vector<int> &positions) {
+     [[maybe_unused]] void RandomGenerator::setAvailablePositions(std::vector<int> &positions) {
         this->availablePositions = positions;
     }
 
