@@ -2,8 +2,10 @@
 #include "headers/Direction.h"
 #include "headers/Game.h"
 #include "headers/RandomGenerator.h"
-#include <iostream>
+#include "headers/InitGame.h"
 
+#include <iostream>
+#include <memory>
 #define CARS_MAX = 4
 #define DIRECTIONS_MAX = 4
 
@@ -14,9 +16,7 @@
 
 int main() {
     rndm::RandomGenerator::init();
-
-    Game game{};
-    game.initGame(1);
+    Game game(nullptr);
     std::cout << game;
     return 0;
 }

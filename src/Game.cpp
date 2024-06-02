@@ -6,40 +6,57 @@
 
 #include <iostream>
 
+// Game class is considered a FACADE
+// Subsystem will communicate to each other using a MEDIATOR
+
+using namespace gameUtils;
+
 // PRIVATE
-
-
 
 
 // PUBLIC
 
-void Game::initGame(int numberOfDirections) {
-    for (int cnt = 1; cnt <= numberOfDirections; cnt++) {
-        this->directions.push_back(new Direction(int(MapPosition::foo)));
+Game::Game(InitGame *initGame_) {
+    try{
+        this->initGame = initGame_ ? throw std::invalid_argument("test") : new InitGame(1);
+        init();
     }
-
-    for (const auto &direction: directions) {
-        this->usedDirectionPositions.insert(direction->getPosition());
+    catch(std::invalid_argument &log){
+        std::cout << "ERROR: " << log.what() << "\n";
     }
+};
 
-    for (auto const &direction: directions) {
-        numberOfCars = rndm::RandomCarGenerator::generateNumberOfCars(1, 3);
-        std::cout << numberOfCars << "\n";
-        for(unsigned int index = 1; index <= numberOfCars; index++)
-        {
-            direction->addCar(rndm::RandomCarGenerator::generateCarPosition(direction->getPosition(), this->usedCarPositions),
-                              "fooColor");
-
-        }
-    }
+Game::~Game() {
+    delete initGame;
 }
+
+// Setters
+
+void Game::setDirections() {
+    this->directions = this->initGame->getDirections();
+}
+
+const std::vector<std::shared_ptr<Direction>> &Game::getDirections() const {
+    return directions;
+}
+
+// Getters
 
 unsigned int Game::getNumberOfCars() const {
     return numberOfCars;
 }
 
-const std::vector<Direction *> &Game::getDirections() const {
-    return directions;
+void Game::setNumberOfCars() {
+    this->numberOfCars = this->initGame->getNumberOfCars();
+}
+
+
+// Initialise
+
+void Game::init() {
+    this->initGame->execute();
+    setDirections();
+    setNumberOfCars();
 }
 
 std::ostream &operator<<(std::ostream &os, Game &game){
@@ -50,9 +67,21 @@ std::ostream &operator<<(std::ostream &os, Game &game){
         os << "car: ";
         for (auto& car : direction->getCars())
         {
-            os << car->getPosition();
+            os << MapPositionUtils::to_string(MapPosition(car->getPosition()));
+            os << " ";
         }
         os << std::endl;
     }
     return os;
 }
+
+
+
+
+
+
+
+
+
+
+

@@ -6,14 +6,15 @@
 #include <cstdlib>
 #include <vector>
 #include <deque>
+#include <memory>
 
 //#pragma once
 class Direction {
 
 private:
     int position;
-    std::vector <Car*> cars;
-    std::deque <Car*> priority_cars;
+    std::vector <std::shared_ptr<Car>> cars;
+    std::deque  <std::shared_ptr<Car>> priority_cars;
 
     // Every direction has a car queue allocated
     // Direction is the local root
@@ -29,7 +30,7 @@ public:
 //    void setCars(const std::vector<Car> &cars_);
 
 //    Getters
-    [[nodiscard]] std::vector<Car*> &getCars();
+    [[nodiscard]] const std::vector<std::shared_ptr<Car>> &getCars() const;
 
     [[nodiscard]] int getPosition() const;
 

@@ -103,6 +103,10 @@ add_executable(${PROJECT_NAME} main.cpp
         src/RandomCarGenerator.cpp
         headers/RandomCarGenerator.h
         headers/MapPosition.h
+        src/MapPositionUtils.cpp
+        headers/MapPositionUtils.h
+        src/InitGame.cpp
+        headers/InitGame.h
 )
 
 ###############################################################################

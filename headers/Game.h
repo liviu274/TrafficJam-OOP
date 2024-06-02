@@ -1,38 +1,43 @@
 #ifndef OOP_GAME_H
 #define OOP_GAME_H
 
-#include "Direction.h"
+
+#include "InitGame.h"
 #include "RandomGenerator.h"
 #include "RandomCarGenerator.h"
 #include "MapPosition.h"
-#include <set>
+#include "MapPositionUtils.h"
 
+#include <memory>
 
 class Game {
 private:
-    std::vector<Direction *> directions;
-    [[maybe_unused]] int numberOfInitialisedCars = 0;
-    [[maybe_unused]] unsigned int numberOfCars;
+    gameUtils::InitGame *initGame;
 
-    std::set<int> usedCarPositions;
-    std::set<int> usedDirectionPositions;
+    unsigned int numberOfCars;
+    std::vector<std::shared_ptr<Direction>> directions;
+
+    //    Setters
+    void setNumberOfCars();
+    void setDirections();
 
 //    Private functions
 
 
 public:
 // Constructors
+    explicit Game(gameUtils::InitGame *initGame_);
+
+    virtual ~Game();
 
 
-// Initializers
-
-    void initGame(int numberOfDirections);
 
 // Getters
     [[nodiscard]] unsigned int getNumberOfCars() const;
+    [[nodiscard]] const std::vector<std::shared_ptr<Direction>> &getDirections() const;
 
-    [[nodiscard]] const std::vector<Direction *> &getDirections() const;
-
+//    Initialise
+void init();
 
 // Ostream
     friend std::ostream &operator<<(std::ostream &os, Game &game);

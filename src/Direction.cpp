@@ -29,8 +29,10 @@ Direction::~Direction() {
 //    std::cout << "set cars succeeded\n";
 //}
 
-std::vector<Car *> &Direction::getCars() {
-    return this->cars;
+//   Getters
+
+const std::vector<std::shared_ptr<Car>> &Direction::getCars() const {
+    return cars;
 }
 
 int Direction::getPosition() const {
@@ -40,7 +42,7 @@ int Direction::getPosition() const {
 //   Class functionalities
 
 void Direction::priorityOrder() {
-    std::sort(this->cars.begin(), this->cars.end(), [](const Car *car1, const Car *car2) {
+    std::sort(this->cars.begin(), this->cars.end(), [](const std::shared_ptr<Car> &car1, const std::shared_ptr<Car> &car2) {
         return car1->getPosition() < car2->getPosition();
     });
     for (auto const &car: this->cars)
@@ -48,10 +50,12 @@ void Direction::priorityOrder() {
 }
 
 void Direction::addCar(int carPosition, const std::string &color) {
-    this->cars.push_back(new Car(carPosition, color));
+    this->cars.push_back(std::make_shared<Car>(carPosition, color));
 }
 
 std::ostream &operator<<(std::ostream &os, const Direction &direction) {
     os << "position: " << direction.position;
     return os;
 }
+
+
